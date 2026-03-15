@@ -1,32 +1,54 @@
-# Visionfuscastor | Advanced Fabric Mod Obfuscation For 1.21.x Mods
-## Features:
+# Visionfuscator
 
-Class renaming
+Visionfuscator is a Java 21 JAR obfuscator built for Minecraft mods and other Java applications. It focuses on practical release protection while keeping runtime compatibility in mind for Fabric and similar mod-loader environments.
 
-Optional member renaming, but it is off by default now because it can break Fabric/Minecraft mods
+## Features
 
-String encryption for normal method string literals
+- Class name obfuscation
+- Optional member renaming
+- String encryption for method literals
+- Encryption of `static final String` constants
+- Common `invokedynamic` string concat rewriting
+- Number obfuscation for integer constants
+- Debug metadata stripping
+- Conservative control-flow obfuscation
+- Optional control-flow flattening
+- Mapping file output for debugging obfuscated releases
+- Fabric entrypoint and mixin exclusion discovery
+- Manifest `Main-Class` remapping
+- Resource and `META-INF` preservation
+- Runtime decryptor injection
 
-Encryption of static final String field constants by moving them into <clinit>
+## Why Visionfuscator
 
-Rewriting of common invokedynamic string concat patterns so concat literals can be hidden too
+Visionfuscator is designed to make reverse engineering more annoying without immediately breaking the mod at runtime. It is especially useful for Minecraft clients and mods where aggressive renaming can easily break mixins, reflection, entrypoints, or event systems.
 
-Number obfuscation for some integer constants
+The safest setup for Minecraft mods is usually:
 
-Debug metadata stripping
+- class renaming enabled
+- member renaming disabled
+- string encryption enabled
+- debug stripping enabled
+- conservative flow obfuscation enabled
 
-Conservative control-flow obfuscation
+## Requirements
 
-Optional control-flow flattening
+- Java 21
+- ASM libraries in `lib/`
+- Windows, Linux, or macOS with Java available
 
-Mapping file output so you can trace obfuscated builds
+## Project Layout
 
-Fabric entrypoint and mixin discovery to avoid renaming classes referenced by metadata
+- `src/main/java/obfuscator/` - source code
+- `lib/` - ASM dependencies
+- `build/classes/` - compiled classes
+- `MANIFEST.MF` - runnable JAR manifest
+- `obfuscator.properties.example` - example config
+- `safe-test.properties` - safer Minecraft/Fabric config
 
-Manifest Main-Class remapping
+## Build
 
-Resource and META-INF copying
+Compile the project:
 
-Runtime decryptor injection
-
-Output JAR generation from input JARs
+```bash
+javac --release 21 -cp "lib/*" -d build/classes src/main/java/obfuscator/*.java
