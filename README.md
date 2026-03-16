@@ -1,6 +1,8 @@
 # Visionfuscator
 
-Visionfuscator is a Java 21 JAR obfuscator built for Minecraft mods and other Java applications. It focuses on practical release protection while keeping runtime compatibility in mind for Fabric and similar mod-loader environments.
+Visionfuscator is a Java 21 JAR obfuscator built for Minecraft mods and other Java applications. It focuses on practical release protection while keeping runtime compatibility in mind for Fabric and similar mod-loader environments. It is currently NOT Opensource.
+
+**Purchase Source: $50**
 
 ## Features
 
